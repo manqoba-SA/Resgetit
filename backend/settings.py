@@ -15,6 +15,9 @@ import os
 import django_heroku
 import dotenv
 import dj_database_url
+import mimetypes
+
+mimetypes.add_type("text/html", ".css", True)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -73,7 +76,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+CORS_ALLOW_ALL_ORIGINS = True
+
+
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
@@ -135,18 +140,18 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
-STATIC_URL = 'static/'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_URL = '/static/'
 # MEDIA_URL = '/images/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'build', 'staticfiles')
 STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, 'build/static')
     BASE_DIR / 'static',
     BASE_DIR / 'build/static'
 ] 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = "static/media"
 MEDIA_URL = '/media/'
 SITE_ID = 1
 REST_FRAMEWORK = {
@@ -180,9 +185,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-
 # Add these at the very last line of settings.py
 django_heroku.settings(locals())
 options = DATABASES['default'].get('OPTIONS', {})
 options.pop('sslmode', None)
-# CORS_ALLOW_ALL_ORIGINS = True
+

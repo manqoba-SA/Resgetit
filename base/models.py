@@ -30,7 +30,6 @@ class Category(models.Model):
     image = models.ImageField(upload_to='categories', blank=True)
 
     class Meta:
-        # ordering = ('name',)
         verbose_name = 'category'
         verbose_name_plural = 'categories'
 
@@ -99,10 +98,6 @@ class OrderItem(models.Model):
         return self.quantity * self.item.price
 
 class Order(models.Model):
-    # PAYMENT = (
-    #     ('C', 'Cash on Delivery'),
-    #     ('CP', 'Card Payment(Payfast)'),
-    # )
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     ref_code = models.CharField(max_length=512, blank=True, null=True)
@@ -112,8 +107,6 @@ class Order(models.Model):
     ordered = models.BooleanField(default=False)
     room_address = models.ForeignKey(
         'Room_info', related_name='Room_info', on_delete=models.SET_NULL, blank=True, null=True)
-    # billing_address = models.ForeignKey(
-    #     'Address', related_name='billing_address', on_delete=models.SET_NULL, blank=True, null=True)
     payment = models.CharField(max_length=100,)
     change = models.CharField(max_length=512)
     coupon = models.ForeignKey(
@@ -179,5 +172,5 @@ class Announcement(models.Model):
         ('dark', 'dark'),
     )
     paragraph = models.CharField(max_length=250, blank=True)
-    alert = models.CharField(max_length=100, choices=ALERTS)
+    alert = models.CharField(max_length=100, choices=ALERTS, default="primary")
     support_link = models.URLField(blank=True)

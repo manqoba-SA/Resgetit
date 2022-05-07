@@ -8,14 +8,14 @@ from django.utils.timezone import datetime, timedelta
 class UserProfile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    stripe_customer_id = models.CharField(max_length=50, blank=True, null=True)
+    stripe_customer_id = models.CharField(max_length=250, blank=True, null=True)
     one_click_purchasing = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username
 
 class Payment(models.Model):
-    stripe_charge_id = models.CharField(max_length=50)
+    stripe_charge_id = models.CharField(max_length=250)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.SET_NULL, blank=True, null=True)
     amount = models.FloatField()
@@ -25,8 +25,8 @@ class Payment(models.Model):
         return self.user.username
 
 class Category(models.Model):
-    name = models.CharField(max_length=200, db_index=True)
-    slug = models.SlugField(max_length=200, unique=True)
+    name = models.CharField(max_length=250, db_index=True)
+    slug = models.SlugField(max_length=250, unique=True)
     image = models.ImageField(upload_to='categories', blank=True)
 
     class Meta:
@@ -149,7 +149,7 @@ class Room_info(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     cell_number = models.CharField(max_length=512)
-    building = models.CharField(max_length=100)
+    building = models.CharField(max_length=512)
     room_number = models.CharField(max_length=5)
     default = models.BooleanField(default=False)
     
@@ -161,7 +161,7 @@ class Room_info(models.Model):
 
 
 class Coupon(models.Model):
-    code = models.CharField(max_length=15)
+    code = models.CharField(max_length=250)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):

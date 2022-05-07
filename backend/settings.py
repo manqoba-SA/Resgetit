@@ -31,7 +31,7 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = 'django-insecure-34lw90#*&oiwvvonn33sk!puf3s+)p+xqkay@*bkhjj)zt&x0d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -141,7 +141,9 @@ STATIC_URL = 'static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'build/static')
+    # os.path.join(BASE_DIR, 'build/static')
+    BASE_DIR / 'static',
+    BASE_DIR / 'build/static'
 ] 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

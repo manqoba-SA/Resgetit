@@ -1,4 +1,4 @@
-from msilib.schema import AdminExecuteSequence
+# from msilib.schema import AdminExecuteSequence
 from django.contrib import admin
 from .models import *
 

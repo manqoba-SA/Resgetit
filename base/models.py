@@ -105,7 +105,7 @@ class Order(models.Model):
     # )
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
-    ref_code = models.CharField(max_length=10, blank=True, null=True)
+    ref_code = models.CharField(max_length=512, blank=True, null=True)
     items = models.ManyToManyField(OrderItem)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -115,12 +115,12 @@ class Order(models.Model):
     # billing_address = models.ForeignKey(
     #     'Address', related_name='billing_address', on_delete=models.SET_NULL, blank=True, null=True)
     payment = models.CharField(max_length=100,)
-    change = models.CharField(max_length=10)
+    change = models.CharField(max_length=512)
     coupon = models.ForeignKey(
         'Coupon', on_delete=models.SET_NULL, blank=True, null=True)
     def return_delivery():
         now = datetime.now()
-        return now + timedelta(minutes=10)
+        return now + timedelta(minutes=20)
     delivery = models.TimeField(default=return_delivery)
 
     '''
@@ -148,7 +148,7 @@ class Order(models.Model):
 class Room_info(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
-    cell_number = models.CharField(max_length=10)
+    cell_number = models.CharField(max_length=512)
     building = models.CharField(max_length=100)
     room_number = models.CharField(max_length=5)
     default = models.BooleanField(default=False)

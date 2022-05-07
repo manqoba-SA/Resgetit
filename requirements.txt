@@ -10,6 +10,7 @@ django-allauth==0.50.0
 django-cors-headers==3.11.0
 django-heroku==0.3.1
 django-rest-auth==0.9.5
+django-rest-auth-forked==0.9.5
 djangorestframework==3.13.1
 idna==3.3
 oauthlib==3.2.0

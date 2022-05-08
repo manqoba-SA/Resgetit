@@ -15,9 +15,9 @@ import os
 import django_heroku
 import dotenv
 import dj_database_url
-import mimetypes
+# import mimetypes
 
-mimetypes.add_type("text/html", ".css", True)
+# mimetypes.add_type("text/html", ".css", True)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

@@ -32,5 +32,7 @@ urlpatterns = [
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     
 ]
-
+admin.site.site_header = "Resgetit Admin"
+admin.site.site_title = "Resgetit Admin Portal"
+admin.site.index_title = "Welcome to Resgetit Admin Portal"
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

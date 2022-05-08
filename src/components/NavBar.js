@@ -229,6 +229,7 @@ export default function NavBar({
                 <>
                   <div className="col-10 pl-0">
                     <Link
+                      onClick={() => setToggleMenu(false)}
                       to="/profile"
                       className="btn btn-sm btn-outline-secondary"
                     >
@@ -247,10 +248,18 @@ export default function NavBar({
                 </>
               ) : (
                 <div className="col-10 pl-0">
-                  <Link to="/signup" className="btn btn-sm btn-primary">
+                  <Link
+                    to="/signup"
+                    onClick={() => setToggleMenu(false)}
+                    className="btn btn-sm btn-primary"
+                  >
                     Register
                   </Link>
-                  <Link to="/signin" className="btn btn-sm mx-3 btn-primary">
+                  <Link
+                    to="/signin"
+                    onClick={() => setToggleMenu(false)}
+                    className="btn btn-sm mx-3 btn-primary"
+                  >
                     {" "}
                     Log In{" "}
                   </Link>
@@ -276,12 +285,12 @@ export default function NavBar({
         </div>
         <ul className="list-unstyled components links">
           <li>
-            <Nav.Link href="/">
+            <Nav.Link href="/" onClick={() => setToggleMenu(false)}>
               <i className="bx bx-home mr-3"></i> Home
             </Nav.Link>
           </li>
           <li>
-            <Nav.Link href="/shop">
+            <Nav.Link href="/shop" onClick={() => setToggleMenu(false)}>
               <i className="bx bx-carousel mr-3"></i> Products
             </Nav.Link>
           </li>
@@ -299,7 +308,7 @@ export default function NavBar({
             ))}
           </li>
           <li>
-            <Nav.Link href="/support">
+            <Nav.Link href="/support" onClick={() => setToggleMenu(false)}>
               <i className="bx bx-phone mr-3"></i> Support
             </Nav.Link>
           </li>

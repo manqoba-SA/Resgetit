@@ -82,6 +82,7 @@ export default function Profile() {
   };
 
   useEffect(() => {
+    document.title = "profile";
     if (!authenticated) {
       navigate("/signin");
     } else {

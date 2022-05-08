@@ -35,6 +35,7 @@ export default function OrderCreated() {
   };
 
   useEffect(() => {
+    document.title = "Order-Received!";
     if (!authenticated) {
       navigate("/signin");
     } else {

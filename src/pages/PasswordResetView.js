@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
@@ -23,6 +23,10 @@ export default function PasswordResetView() {
       dispatch(authConfirmPassReset(uid, utoken, password1, password2));
     }
   };
+
+  useEffect(() => {
+    document.title = "Make new password";
+  }, []);
 
   return (
     <>

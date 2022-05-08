@@ -24,12 +24,31 @@ from .models import *
 from .serializers import AnnouncementSerializer, CategorySerializer, OrderCompleteSerializer, ProductSerializer, OrderSerializer, RoomInfoSerializer
 from django.views import View
 from django.http import HttpResponse, HttpResponseNotFound
+from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
 
 
 def create_ref_code():
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))
 
-# Add this CBV
+def html_email(email, subject, to_email, template_name):
+    from_email = settings.EMAIL_HOST_USER
+    text_content = """
+    {}
+
+    {}
+
+    {}
+    regards,
+    Resgetit Support
+    """. format(email['shortDescription'], email['subtitle'], email['message'])
+    html_file = get_template(template_name)
+    context = {'email': email}
+    html_content = html_file.render(context)
+    msg = EmailMultiAlternatives(subject, text_content, from_email, to_email)
+    msg.attach_alternative(html_content, 'text/html')
+    msg.send()
 
             
 # Create your views here.
@@ -243,6 +262,16 @@ class PaymentView(APIView):
                     order.room_address = room_address
                     order.ref_code = create_ref_code()
                     order.save()
+                    #send email
+                    email = {
+                        "title": "Thank your for registering with Resgetit",
+                        "shortDescription": order_items,
+                        "subtitle": order.total,
+                        "message": order
+                    }
+                    subject = '[Resgetit] Order no {} Received'.format(order.id)
+                    to_email = self.request.user.email
+                    html_email(email, subject, [to_email], "order_confirmation _email.html")
                     return Response(status=HTTP_200_OK)
             except requests.exceptions.ConnectionError as e:
                 body = e.json_body
@@ -267,6 +296,17 @@ class PaymentView(APIView):
             order.room_address = room_address
             order.ref_code = create_ref_code()
             order.save()
+
+            #send email
+            email = {
+                "title": "Thank your for registering with Resgetit",
+                "shortDescription": order_items,
+                "subtitle": order.total,
+                "message": order
+            }
+            subject = '[Resgetit] Order no {} Received'.format(order.id)
+            to_email = self.request.user.email
+            html_email(email, subject, [to_email,"nqobi.it4073@gmail", "tranzezicocreations@gmail.com", "Klerato43@gmail.com", "Keamohetsemsira@gmail.com"], "order_confirmation _email.html")
             return Response(status=HTTP_200_OK)
 
 class CreateRoomInfoView(CreateAPIView):

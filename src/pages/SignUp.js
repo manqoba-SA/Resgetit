@@ -19,6 +19,7 @@ export default function SignUp({ location, history }) {
   const { error, loading, token } = authList;
 
   useEffect(() => {
+    document.title = "Register | resgetit";
     if (token) {
       <Navigate to="/register-complete" />;
     }

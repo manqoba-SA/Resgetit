@@ -13,6 +13,7 @@ export default function UserRegistered() {
   const { error, loading, user } = authList;
 
   useEffect(() => {
+    document.title = "Welcome✌️";
     dispatch(authGetUserInfo());
   }, []);
   return (

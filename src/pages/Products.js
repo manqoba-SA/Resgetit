@@ -28,6 +28,7 @@ export default function Products({ history }) {
   const { error, loading, products } = productList;
   const cart = useSelector((state) => state.cart.data);
   useEffect(() => {
+    document.title = "shop | resgetit";
     dispatch(listProducts(keyword));
     setCstring(newString);
     dispatch(listCategories());

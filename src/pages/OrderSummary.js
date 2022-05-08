@@ -85,6 +85,7 @@ export default function OrderSummary() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = "Shopping Bag";
     if (!authenticated) {
       navigate("/signin");
     } else {

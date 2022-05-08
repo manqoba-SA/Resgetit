@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -15,11 +15,13 @@ export default function ForgotPassword() {
     e.preventDefault();
     dispatch(authPassReset(email));
   };
+  useEffect(() => {
+    document.title = "password-reset";
+  }, []);
 
-  console.log(resetToken);
   return (
     <>
-      <div className="globa-container">
+      <div className="global-container">
         <div className="card login-form">
           <div className="card-body">
             {resetToken ? (

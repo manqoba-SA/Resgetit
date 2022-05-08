@@ -16,6 +16,7 @@ export default function SignIn({ history }) {
   const { error, loading, token } = authList;
 
   useEffect(() => {
+    document.title = "Login | resgetit";
     if (token) {
       <Navigate to="/" />;
     }

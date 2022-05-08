@@ -20,7 +20,7 @@ export default function Checkout() {
 
   const cartFetch = () => {
     authAxios
-      .get("/order-summary")
+      .get("/order-summary/")
       .then((res) => {
         setCart(res.data);
       })
@@ -40,7 +40,7 @@ export default function Checkout() {
   const handleFetchRoomInfo = () => {
     setLoading(true);
     authAxios
-      .get("/room-info")
+      .get("/room-info/")
       .then((res) => {
         setRooms(res.data);
         setSelectedRoom(handleGetDefaultAddress(res.data));
@@ -59,6 +59,7 @@ export default function Checkout() {
   };
 
   useEffect(() => {
+    document.title = "Checkout";
     cartFetch();
     handleFetchRoomInfo();
   }, []);

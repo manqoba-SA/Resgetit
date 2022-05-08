@@ -31,12 +31,11 @@ export default function Profile() {
   const navigate = useNavigate();
   const authList = useSelector((state) => state.authList);
   const { user } = authList;
-  console.log(user);
 
   const handleFetchRoomInfo = () => {
     setLoading(true);
     authAxios
-      .get("/room-info")
+      .get("/room-info/")
       .then((res) => {
         setRooms(res.data);
         setLoading(false);
@@ -49,7 +48,7 @@ export default function Profile() {
 
   const handleFetchUserId = () => {
     authAxios
-      .get("/user-id")
+      .get("/user-id/")
       .then((res) => {
         setUserId(res.data.userID);
       })
@@ -61,7 +60,7 @@ export default function Profile() {
   const handleDeleteAddress = (addressID) => {
     setLoading(true);
     authAxios
-      .delete(`room-info/${addressID}/delete`)
+      .delete(`room-info/${addressID}/delete/`)
       .then((res) => {
         handleCallback();
         setLoading(false);
@@ -94,24 +93,27 @@ export default function Profile() {
   return (
     <>
       <Container className="mt-10">
-        <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
+        <Tab.Container
+          id="list-group-tabs-example"
+          defaultActiveKey="#/profile/#link1"
+        >
           <Row>
             <Col sm={4}>
               <ListGroup>
-                <ListGroup.Item action href="#link1">
+                <ListGroup.Item action href="#/profile/#link1">
                   Room Address
                 </ListGroup.Item>
-                <ListGroup.Item action href="#link2">
+                <ListGroup.Item action href="#/profile/#link2">
                   Personal Info
                 </ListGroup.Item>
-                <ListGroup.Item action href="#link3">
+                <ListGroup.Item action href="#/profile/#link3">
                   Orders
                 </ListGroup.Item>
               </ListGroup>
             </Col>
             <Col sm={8} className="align-text-center justify-content-center">
               <Tab.Content>
-                <Tab.Pane eventKey="#link1">
+                <Tab.Pane eventKey="#/profile/#link1">
                   <Container>
                     {loading && <Loader />}
                     {error && (
@@ -180,7 +182,7 @@ export default function Profile() {
                     )}
                   </Container>
                 </Tab.Pane>
-                <Tab.Pane eventKey="#link2">
+                <Tab.Pane eventKey="#/profile/#link2">
                   <Container>
                     <h5>My Personal Information</h5>
                     <div class="row gutters-sm">
@@ -265,7 +267,7 @@ export default function Profile() {
                     </div>
                   </Container>
                 </Tab.Pane>
-                <Tab.Pane eventKey="#link3">
+                <Tab.Pane eventKey="#/profile/#link3">
                   <p>Orders</p>
                 </Tab.Pane>
               </Tab.Content>

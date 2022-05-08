@@ -20,7 +20,7 @@ export default function OrderSummary() {
   const cartFetch1 = () => {
     setLoading(true);
     authAxios
-      .get("/order-summary")
+      .get("/order-summary/")
       .then((res) => {
         setLoading(false);
         setCart(res.data);

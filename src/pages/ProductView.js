@@ -28,8 +28,8 @@ export default function ProductView() {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
   useEffect(() => {
-    document.title = `${product.name} | resgetit`;
     dispatch(listProductDetails(id));
+    document.title = `${product.name} | resgetit`;
   }, [dispatch]);
   const fetchCart = () => dispatch(cartFetch());
   const cart = useSelector((state) => state.cart.data);

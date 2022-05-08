@@ -61,6 +61,7 @@ export const authLogin = (username, password) => {
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         localStorage.setItem("token", token);
         localStorage.setItem("expirationDate", expirationDate);
+        window.location.reload();
         dispatch(authSuccess(token, "", ""));
         dispatch(checkAuthTimeout(3600));
       })
@@ -94,6 +95,7 @@ export const authSignup = (username, email, password1, password2) => {
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         localStorage.setItem("token", token);
         localStorage.setItem("expirationDate", expirationDate);
+        window.location.reload();
         dispatch(authSuccess(token, "", ""));
         dispatch(checkAuthTimeout(3600));
       })
@@ -180,11 +182,6 @@ export const authConfirmPassReset = (uid, token, pass1, pass2) => {
 };
 
 export const authGetUserInfo = () => {
-  const config = {
-    headers: {
-      "Content-type": "application/json",
-    },
-  };
   return (dispatch) => {
     dispatch(authStart());
     axios

@@ -27,7 +27,7 @@ export const cartFetch = () => {
   return (dispatch) => {
     dispatch(cartStart());
     authAxios
-      .get("/order-summary")
+      .get("/order-summary/")
       .then((res) => {
         dispatch(cartSuccess(res.data));
       })

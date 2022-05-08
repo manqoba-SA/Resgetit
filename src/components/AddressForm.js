@@ -31,7 +31,6 @@ export default function AddressForm({ room, formType, userID, callback }) {
 
   const handleCreateRoomInfo = () => {
     setSaving(true);
-    console.log(formData);
     authAxios
       .post("/room-info/create", {
         ...formData,

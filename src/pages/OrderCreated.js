@@ -17,7 +17,7 @@ export default function OrderCreated() {
   const cartFetch1 = () => {
     setCart({ data: null, error: null, loading: true });
     authAxios
-      .get("/order-complete")
+      .get("/order-complete/")
       .then((res) => {
         setCart({ data: res.data, loading: false, error: null });
       })
@@ -131,8 +131,9 @@ export default function OrderCreated() {
               </div>
               <p class="text-center">
                 {" "}
-                At Herb and Miller we deliver between 8am to 8pm and Quantile
-                between 8am to 00:00
+                Please be aware the delivery will be depend on our availability
+                in all we promise to deliver when we can. We will be operating
+                mostly an night.Thank you.
               </p>
               <div>
                 {" "}

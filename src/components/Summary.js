@@ -9,7 +9,7 @@ export default function Summary() {
   const cartFetch = () => {
     setCart({ data: null, error: null, loading: true });
     authAxios
-      .get("/order-summary")
+      .get("/order-summary/")
       .then((res) => {
         setCart({ data: res.data, loading: false, error: null });
       })

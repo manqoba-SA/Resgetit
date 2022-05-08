@@ -32,6 +32,7 @@ export default function Products({ history }) {
     dispatch(listProducts(keyword));
     setCstring(newString);
     dispatch(listCategories());
+    fetchCart();
   }, [dispatch, keyword, location]);
 
   const [loadingState, setLoadingState] = useState(false);

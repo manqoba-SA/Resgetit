@@ -36,7 +36,7 @@ export default function CartOffCanvas({
   const cartFetch1 = () => {
     setLoading(true);
     authAxios
-      .get("/order-summary")
+      .get("/order-summary/")
       .then((res) => {
         setError("");
         setLoading(false);

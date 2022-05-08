@@ -38,6 +38,7 @@ export default function CartOffCanvas({
     authAxios
       .get("/order-summary")
       .then((res) => {
+        setError("");
         setLoading(false);
         setCart(res.data);
       })

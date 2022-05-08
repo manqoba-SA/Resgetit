@@ -8,7 +8,13 @@ import searchImage from "../images/search.png";
 import menuIcon from "../images/menu.png";
 import closeIcon from "../images/close.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCogs,
+  faHome,
+  faLifeRing,
+  faShoppingBag,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SearchBox from "./SearchBox";
@@ -98,7 +104,9 @@ export default function NavBar({
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/shop">Products</Nav.Link>
+              <Nav.Link>
+                <Link to="/shop">Products</Link>
+              </Nav.Link>
               {categories.map((category) => (
                 <Fragment key={category.id}>
                   {category.name === "Services" ? (
@@ -111,8 +119,8 @@ export default function NavBar({
                 </Fragment>
               ))}
               <NavDropdown title="Categories" id="basic-nav-dropdown">
-                <NavDropdown.Item href="/shop">
-                  View All Products
+                <NavDropdown.Item>
+                  <Link to="/shop">View All Products</Link>
                 </NavDropdown.Item>
                 {categories.map((category) => (
                   <NavDropdown.Item
@@ -123,7 +131,9 @@ export default function NavBar({
                   </NavDropdown.Item>
                 ))}
               </NavDropdown>
-              <Nav.Link href="/support">Support</Nav.Link>
+              <Nav.Link>
+                <Link to="/support">Support</Link>
+              </Nav.Link>
             </Nav>
             <Nav>
               <div className="nav-item d-flex">
@@ -285,13 +295,17 @@ export default function NavBar({
         </div>
         <ul className="list-unstyled components links">
           <li>
-            <Nav.Link href="/" onClick={() => setToggleMenu(false)}>
-              <i className="bx bx-home mr-3"></i> Home
+            <Nav.Link onClick={() => setToggleMenu(false)}>
+              <Link to="/">
+                <FontAwesomeIcon icon={faHome} /> Home
+              </Link>
             </Nav.Link>
           </li>
           <li>
-            <Nav.Link href="/shop" onClick={() => setToggleMenu(false)}>
-              <i className="bx bx-carousel mr-3"></i> Products
+            <Nav.Link onClick={() => setToggleMenu(false)}>
+              <Link to="/shop">
+                <FontAwesomeIcon icon={faShoppingBag} /> Products
+              </Link>
             </Nav.Link>
           </li>
           <li>
@@ -299,7 +313,7 @@ export default function NavBar({
               <Fragment key={category.id}>
                 {category.name === "Services" ? (
                   <Nav.Link onClick={() => submitHandler(category.id)}>
-                    {category.name}
+                    <FontAwesomeIcon icon={faCogs} /> {category.name}
                   </Nav.Link>
                 ) : (
                   ""
@@ -308,8 +322,10 @@ export default function NavBar({
             ))}
           </li>
           <li>
-            <Nav.Link href="/support" onClick={() => setToggleMenu(false)}>
-              <i className="bx bx-phone mr-3"></i> Support
+            <Nav.Link onClick={() => setToggleMenu(false)}>
+              <Link to="/support">
+                <FontAwesomeIcon icon={faLifeRing} /> Support
+              </Link>
             </Nav.Link>
           </li>
         </ul>

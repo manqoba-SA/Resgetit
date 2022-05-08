@@ -81,10 +81,13 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'backend.urls'
 
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'build')
+EMAIL_TEMP_DIR = os.path.join(BASE_DIR, 'templates')
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'build')],
+        'DIRS': [TEMPLATES_DIR, EMAIL_TEMP_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

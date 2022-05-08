@@ -55,7 +55,6 @@ export default function Checkout() {
     setSelectedRoom(e.target.value);
   };
   const handlePaymentChange = (e) => {
-    console.log(e.target.value);
     setPayment(e.target.value);
   };
 

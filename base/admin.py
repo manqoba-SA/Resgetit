@@ -17,7 +17,7 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 
-
+@admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['id','user',
                     'ordered',
@@ -37,7 +37,7 @@ class OrderAdmin(admin.ModelAdmin):
         'ref_code'
     ]
 
-
+@admin.register(Room_info)
 class Room_infoAdmin(admin.ModelAdmin):
     list_display = [
         'user',
@@ -51,8 +51,6 @@ class Room_infoAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Review)
-admin.site.register(Order)
 admin.site.register(OrderItem)
-admin.site.register(Room_info)
 admin.site.register(Coupon)
 admin.site.register(Announcement)

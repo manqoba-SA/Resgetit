@@ -151,7 +151,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'build/static'
 ] 
 
-# MEDIA_ROOT = "static/media"
+MEDIA_ROOT = "static/media"
 MEDIA_URL = '/media/'
 SITE_ID = 1
 REST_FRAMEWORK = {

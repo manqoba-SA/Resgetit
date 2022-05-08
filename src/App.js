@@ -1,4 +1,4 @@
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import { authCheckState } from "./actions/authActions";
 import "./App.css";
 import "animate.css/animate.css";

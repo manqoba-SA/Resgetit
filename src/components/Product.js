@@ -9,7 +9,7 @@ export default function Product({ product, addToCart, loading }) {
       <Card className="my-card text-center">
         <img
           src={product.image}
-          className="card-img-top product-image"
+          className="card-img-top product-image animate__animated animate__fadeIn animate__faster"
           loading="lazy"
           alt={product.name}
         />

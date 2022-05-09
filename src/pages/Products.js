@@ -10,6 +10,7 @@ import { addToCartURL } from "../constants/cartConstants";
 import { cartFetch } from "../actions/cartActions";
 import CartOffCanvas from "../components/CartOffCanvas";
 import { useLocation, useNavigate } from "react-router-dom";
+import Paginate from "../components/Paginate";
 
 export default function Products({ history }) {
   const location = useLocation(history);
@@ -17,15 +18,17 @@ export default function Products({ history }) {
   var newString = "";
   if (keyword.startsWith("?keyword=")) {
     newString = "";
-  } else {
+  } else if (keyword.startsWith("?category")) {
     newString = keyword.replaceAll("?category=", "");
+  } else {
+    newString = "";
   }
 
   const [cString, setCstring] = useState("");
   const dispatch = useDispatch();
   const fetchCart = () => dispatch(cartFetch());
   const productList = useSelector((state) => state.productList);
-  const { error, loading, products } = productList;
+  const { error, loading, products, page, pages } = productList;
   const cart = useSelector((state) => state.cart.data);
   useEffect(() => {
     document.title = "shop | resgetit";
@@ -148,6 +151,12 @@ export default function Products({ history }) {
                       </Col>
                     ))}
                 </Row>
+
+                <Paginate
+                  page={page}
+                  pages={pages}
+                  keyword={keyword.startsWith("?category") ? "" : keyword}
+                />
               </Container>
             </>
           )}

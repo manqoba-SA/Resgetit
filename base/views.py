@@ -27,6 +27,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def create_ref_code():
@@ -79,8 +80,23 @@ def getProducts(request):
     if query is None:
         query = ""
     products = Product.objects.filter(name__icontains=query)
+
+    page = request.query_params.get("page")
+    paginator = Paginator(products, 2)
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+    
+    if page == None:
+        page = 1
+    
+    page = int(page)
+
     serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
+    return Response({"products": serializer.data, "page" : page, "pages": paginator.num_pages})
 
 @api_view(["GET"])
 def getProduct(request, id_num):

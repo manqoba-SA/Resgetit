@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Categories() {
   const dispatch = useDispatch();
+  const [imgLoading, setImgLoading] = useState(false);
   const categoryList = useSelector((state) => state.categoryList);
   const { error, loading, categories } = categoryList;
   const navigate = useNavigate();
@@ -72,7 +73,18 @@ export default function Categories() {
                         <Link to="/shop">
                           <div className="card-inner p-3 d-flex flex-column align-items-center">
                             {" "}
-                            <img src={foodImg} width="50" alt="all-img" />
+                            {!imgLoading && (
+                              <div className="container">
+                                <Loader />
+                              </div>
+                            )}
+                            <img
+                              src={foodImg}
+                              loading="lazy"
+                              onLoad={() => setImgLoading(true)}
+                              width="50"
+                              alt="all-img"
+                            />
                             <div className="text-center mg-text">
                               {" "}
                               <span className="mg-text">All</span>{" "}
@@ -85,8 +97,11 @@ export default function Categories() {
                           <div onClick={() => submitHandler(category.id)}>
                             <div className="card-inner p-3 d-flex flex-column align-items-center">
                               {" "}
+                              {!imgLoading && <Loader />}
                               <img
                                 src={category.image}
+                                loading="lazy"
+                                onLoad={() => setImgLoading(true)}
                                 width="50"
                                 alt={category.name}
                               />

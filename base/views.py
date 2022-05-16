@@ -287,7 +287,7 @@ class PaymentView(APIView):
                     }
                     subject = '[Resgetit] Order no {} Received'.format(order.id)
                     to_email = self.request.user.email
-                    html_email(email, subject, [to_email], "order_confirmation _email.html")
+                    html_email(email, subject, [to_email, "nqobi.it4073@gmail.com", "tranzezicocreations@gmail.com", "Klerato43@gmail.com", "Keamohetsemsira@gmail.com"], "order_confirmation _email.html")
                     return Response(status=HTTP_200_OK)
             except requests.exceptions.ConnectionError as e:
                 body = e.json_body
@@ -322,7 +322,7 @@ class PaymentView(APIView):
             }
             subject = '[Resgetit] Order no {} Received'.format(order.id)
             to_email = self.request.user.email
-            html_email(email, subject, [to_email,"nqobi.it4073@gmail", "tranzezicocreations@gmail.com", "Klerato43@gmail.com", "Keamohetsemsira@gmail.com"], "order_confirmation _email.html")
+            html_email(email, subject, [to_email,"nqobi.it4073@gmail.com", "tranzezicocreations@gmail.com", "Klerato43@gmail.com", "Keamohetsemsira@gmail.com"], "order_confirmation _email.html")
             return Response(status=HTTP_200_OK)
 
 class CreateRoomInfoView(CreateAPIView):

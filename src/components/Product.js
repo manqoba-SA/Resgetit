@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Loader from "./Loader";
 
 export default function Product({ product, addToCart, loading }) {
+  const [imgLoading, setImgLoading] = useState(false);
   return (
     <>
       <Card className="my-card text-center">
+        {!imgLoading && <Loader />}
         <img
           src={product.image}
+          onLoad={() => setImgLoading(true)}
           className="card-img-top product-image animate__animated animate__fadeIn animate__faster"
           loading="lazy"
           alt={product.name}

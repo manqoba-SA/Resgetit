@@ -8,7 +8,7 @@ export default function Footer() {
     <>
       <footer className="responsive-footer">
         <div className="copyright">
-          <p>© 2021 - RESGETIT✌</p>
+          <p>© 2022 - RESGETIT✌</p>
           <img src={yocoImg} width="50" height="50" alt="yoco-logo" />
         </div>
         <div className="social">

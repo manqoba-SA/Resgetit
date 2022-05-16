@@ -22,9 +22,9 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
+# dotenv_file = os.path.join(BASE_DIR, ".env")
+# if os.path.isfile(dotenv_file):
+#     dotenv.load_dotenv(dotenv_file)
 
 
 # Quick-start development settings - unsuitable for production
@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_auth',
     'rest_auth.registration',
+    "storages",
     
     'base.apps.BaseConfig'
 ]
@@ -106,8 +107,28 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=1000)
+# DATABASES = {}
+# DATABASES['default'] = dj_database_url.config(conn_max_age=1000)
+
+DATABASES = {
+
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': 'resgetit',
+
+        'USER': 'resgetit1',
+
+        'PASSWORD': 'resgetit.a218',
+
+        'HOST': 'database-resgetit.c3usnswp7q9x.us-east-1.rds.amazonaws.com',
+
+        'PORT': '5432',
+
+    }
+
+}
 
 
 # Password validation
@@ -134,7 +155,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Johannesburg'
 
 USE_I18N = True
 
@@ -155,7 +176,7 @@ STATICFILES_DIRS = [
 ] 
 
 MEDIA_ROOT = "static/media"
-MEDIA_URL = '/media/'
+MEDIA_URL = '/images/'
 SITE_ID = 1
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -189,7 +210,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Add these at the very last line of settings.py
-django_heroku.settings(locals())
-options = DATABASES['default'].get('OPTIONS', {})
-options.pop('sslmode', None)
+# django_heroku.settings(locals())
+# options = DATABASES['default'].get('OPTIONS', {})
+# options.pop('sslmode', None)111
 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = "AKIA3JF5V2OF6AQ6HL4E"
+AWS_SECRET_ACCESS_KEY = "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"
+AWS_STORAGE_BUCKET_NAME = "resgetit-bucket1"
+AWS_QUERYSTRING_AUTH = False

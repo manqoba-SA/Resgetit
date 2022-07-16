@@ -31,14 +31,6 @@ export const logout = () => {
   };
 };
 
-export const checkAuthTimeout = (expirationTime) => {
-  return (dispatch) => {
-    setTimeout(() => {
-      dispatch(logout());
-    }, expirationTime * 1000);
-  };
-};
-
 export const authLogin = (username, password) => {
   const config = {
     headers: {
@@ -58,12 +50,12 @@ export const authLogin = (username, password) => {
       )
       .then((res) => {
         const token = res.data.key;
-        const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+        // const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         localStorage.setItem("token", token);
-        localStorage.setItem("expirationDate", expirationDate);
+        // localStorage.setItem("expirationDate", expirationDate);
         window.location.reload();
         dispatch(authSuccess(token, "", ""));
-        dispatch(checkAuthTimeout(3600));
+        // dispatch(checkAuthTimeout(3600));
       })
       .catch((error) => {
         dispatch(authFail(error.response.data));
@@ -92,12 +84,9 @@ export const authSignup = (username, email, password1, password2) => {
       )
       .then((res) => {
         const token = res.data.key;
-        const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         localStorage.setItem("token", token);
-        localStorage.setItem("expirationDate", expirationDate);
         window.location.reload();
         dispatch(authSuccess(token, "", ""));
-        dispatch(checkAuthTimeout(3600));
       })
       .catch((error) => {
         dispatch(authFail(error.response.data));
@@ -111,17 +100,7 @@ export const authCheckState = () => {
     if (token === undefined) {
       dispatch(logout());
     } else {
-      const expirationDate = new Date(localStorage.getItem("expirationDate"));
-      if (expirationDate <= new Date()) {
-        dispatch(logout());
-      } else {
-        dispatch(authSuccess(token, "", ""));
-        dispatch(
-          checkAuthTimeout(
-            (expirationDate.getTime() - new Date().getTime()) / 1000
-          )
-        );
-      }
+      dispatch(authSuccess(token, "", ""));
     }
   };
 };

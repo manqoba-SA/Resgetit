@@ -11,15 +11,7 @@ export default function AddressForm({ room, formType, userID, callback }) {
   const [error, setError] = useState();
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [formData, setFormData] = useState({ default: false });
-
-  const handleToogleChange = (e) => {
-    const updatedFormData = {
-      ...formData,
-      default: !formData.default,
-    };
-    setFormData(updatedFormData);
-  };
+  const [formData, setFormData] = useState({});
 
   const handleChange = (e) => {
     const updatedFormData = {
@@ -134,15 +126,6 @@ export default function AddressForm({ room, formType, userID, callback }) {
             name="room_number"
             type="text"
             className="form-control form-control-sm"
-          />
-        </div>
-        <div className="form-group">
-          <Form.Check
-            onChange={handleToogleChange}
-            name="default"
-            type="switch"
-            id="custom-switch"
-            label="Make this a default room address"
           />
         </div>
 

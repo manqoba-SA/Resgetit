@@ -29,25 +29,18 @@ export default function Checkout() {
       });
   };
 
-  const handleGetDefaultAddress = (rooms) => {
-    const filteredAddresses = rooms.filter((el) => el.default === true);
-    if (filteredAddresses.length > 0) {
-      return filteredAddresses[0].id;
-    }
-    return "";
-  };
-
   const handleFetchRoomInfo = () => {
     setLoading(true);
     authAxios
       .get("/room-info/")
       .then((res) => {
         setRooms(res.data);
-        setSelectedRoom(handleGetDefaultAddress(res.data));
+        setSelectedRoom(res.data[0].id);
         setLoading(false);
       })
       .catch((error) => {
         setError(true);
+        setLoading(false);
       });
   };
 
@@ -237,7 +230,7 @@ export default function Checkout() {
                           <>
                             <p>
                               You currently do have Shipping Room info Please
-                              add you room info
+                              add your room info
                             </p>
                             <Link to="/profile">
                               <Button variant="primary">Add</Button>

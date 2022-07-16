@@ -50,12 +50,9 @@ export const authLogin = (username, password) => {
       )
       .then((res) => {
         const token = res.data.key;
-        // const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         localStorage.setItem("token", token);
-        // localStorage.setItem("expirationDate", expirationDate);
         window.location.reload();
         dispatch(authSuccess(token, "", ""));
-        // dispatch(checkAuthTimeout(3600));
       })
       .catch((error) => {
         dispatch(authFail(error.response.data));
@@ -167,6 +164,31 @@ export const authGetUserInfo = () => {
       .get(`rest-auth/user/`, {
         headers: { Authorization: `Token ${localStorage.getItem("token")}` },
       })
+      .then((res) => {
+        const token = localStorage.getItem("token");
+        const user = res.data;
+        dispatch(authSuccess(token, "", user));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(authFail(error.response.data));
+      });
+  };
+};
+
+export const authUpdateUserInfo = (username, first_name, last_name) => {
+  return (dispatch) => {
+    dispatch(authStart());
+    axios
+      .put(
+        `rest-auth/user/`,
+        {
+          username,
+          first_name,
+          last_name,
+        },
+        { headers: { Authorization: `Token ${localStorage.getItem("token")}` } }
+      )
       .then((res) => {
         const token = localStorage.getItem("token");
         const user = res.data;

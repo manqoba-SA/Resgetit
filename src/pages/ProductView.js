@@ -187,9 +187,6 @@ export default function ProductView() {
                   {loadingState ? <Loader /> : "Add to Bag"}{" "}
                 </button>
               )}
-              <Button size="sm" href="#more-info">
-                {" "}
-              </Button>
             </article>
           </Col>
           <Col sm={12}>

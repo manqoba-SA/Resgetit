@@ -16,6 +16,9 @@ body {
   border-bottom: 3px solid #007bff;
   color: #007bff;
 }
+.btn-primary {
+  background-color: #46b3e6 !important;
+}
 .navbar .navbar-toggler {
   border: none;
 }

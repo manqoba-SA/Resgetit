@@ -183,7 +183,6 @@ export default function OrderSummary() {
                                     className="mb-1 text-danger animate__animated animate__wobble animate_slow"
                                   />
                                 </Button>
-                                {/* <i className="fa fa-trash mb-1 text-danger"></i> */}
                               </div>
                             </div>
                             <hr className="m-0" />
@@ -204,7 +203,7 @@ export default function OrderSummary() {
                 <div className="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded">
                   <Link
                     to="/checkout"
-                    className="btn btn-primary w-100 btn-block btn-lg ml-2 pay-button"
+                    className="btn w-100 btn-block btn-lg ml-2"
                     type="button"
                   >
                     Proceed to Checkout

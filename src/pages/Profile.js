@@ -9,16 +9,15 @@ import {
   Row,
   Tab,
 } from "react-bootstrap";
-import Form from "react-bootstrap/Form";
-import Modal from "react-bootstrap/Modal";
 
 import { authAxios } from "../utils";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import AddressForm from "../components/AddressForm";
-import { authGetUserInfo, authUpdateUserInfo } from "../actions/authActions";
+import { authGetUserInfo } from "../actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import UserForm from "../components/UserForm";
 
 const UPDATE_FORM = "UPDATE_FORM";
 const CREATE_FORM = "CREATE_FORM";
@@ -90,12 +89,6 @@ export default function Profile() {
     setSelectedAddress(null);
   };
 
-  const [username, setUsername] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const handleUserUpdate = () => {
-    dispatch(authUpdateUserInfo(username, firstName, lastName));
-  };
   useEffect(() => {
     document.title = "profile";
     if (!authenticated) {
@@ -281,66 +274,11 @@ export default function Profile() {
                         </div>
                       </div>
                     </div>
-
-                    <Modal show={showModal} onHide={handleClose}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>Update Personal details</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <Form>
-                          <Form.Group
-                            className="mb-3"
-                            controlId="exampleForm.ControlInput1"
-                          >
-                            <Form.Label>Username</Form.Label>
-                            <Form.Control
-                              type="text"
-                              // value={user?.username}
-                              onChange={(e) => {
-                                setUsername(e.target.value);
-                              }}
-                              autoFocus
-                            />
-                          </Form.Group>
-                          <Form.Group
-                            className="mb-3"
-                            controlId="exampleForm.ControlTextarea1"
-                          >
-                            <Form.Label>First Name</Form.Label>
-                            <Form.Control
-                              type="text"
-                              onChange={(e) => {
-                                setFirstName(e.target.value);
-                              }}
-                              // value={user?.first_name}
-                              autoFocus
-                            />
-                          </Form.Group>
-                          <Form.Group
-                            className="mb-3"
-                            controlId="exampleForm.ControlTextarea1"
-                          >
-                            <Form.Label>Last Name</Form.Label>
-                            <Form.Control
-                              type="text"
-                              // value={user?.last_name}
-                              onChange={(e) => {
-                                setLastName(e.target.value);
-                              }}
-                              autoFocus
-                            />
-                          </Form.Group>
-                        </Form>
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                          Close
-                        </Button>
-                        <Button variant="primary" onClick={handleUserUpdate}>
-                          Save Changes
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
+                    <UserForm
+                      user={user}
+                      showModal={showModal}
+                      handleClose={handleClose}
+                    />
                   </Container>
                 </Tab.Pane>
                 <Tab.Pane eventKey="#/profile/#link3">

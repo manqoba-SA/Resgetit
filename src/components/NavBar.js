@@ -32,6 +32,8 @@ export default function NavBar({
   const navigate = useNavigate();
   const categoryList = useSelector((state) => state.categoryList);
   const { categories } = categoryList;
+  const authList = useSelector((state) => state.authList);
+  const { user } = authList;
 
   useEffect(() => {
     dispatch(listCategories());
@@ -187,12 +189,13 @@ export default function NavBar({
               <>
                 {authenticated ? (
                   <>
-                    <Link to="/profile" className="d-flex">
+                    <Link to="/profile" className="d-flex" role="button">
                       <Button
-                        variant="primary-outline"
+                        variant="primary"
                         className="mx-2 register-nav-button"
                       >
-                        <FontAwesomeIcon icon={faUser} /> My Profile
+                        <FontAwesomeIcon icon={faUser} size={"lg"} />{" "}
+                        {user?.username}
                       </Button>
                     </Link>
                     <Nav.Link className="d-flex">

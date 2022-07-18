@@ -19,6 +19,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SearchBox from "./SearchBox";
 import { listCategories } from "../actions/productActions";
+import { authGetUserInfo } from "../actions/authActions";
 
 export default function NavBar({
   authenticated,
@@ -37,6 +38,7 @@ export default function NavBar({
 
   useEffect(() => {
     dispatch(listCategories());
+    dispatch(authGetUserInfo());
   }, [dispatch]);
   const submitHandler = (keyword) => {
     navigate(`/shop?category=${keyword}`);

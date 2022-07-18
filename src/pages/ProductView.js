@@ -30,7 +30,7 @@ export default function ProductView() {
   useEffect(() => {
     dispatch(listProductDetails(id));
     document.title = `${product.name} | resgetit`;
-  }, [dispatch]);
+  }, [dispatch, product]);
   const fetchCart = () => dispatch(cartFetch());
   const cart = useSelector((state) => state.cart.data);
   const [loadingState, setLoadingState] = useState(false);

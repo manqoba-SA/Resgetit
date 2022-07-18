@@ -187,16 +187,14 @@ export default function NavBar({
               <>
                 {authenticated ? (
                   <>
-                    <div className="d-flex">
-                      <Link to="/profile">
-                        <Button
-                          variant="primary-outline"
-                          className="mx-2 register-nav-button"
-                        >
-                          <FontAwesomeIcon icon={faUser} /> My Profile
-                        </Button>
-                      </Link>
-                    </div>
+                    <Link to="/profile" className="d-flex">
+                      <Button
+                        variant="primary-outline"
+                        className="mx-2 register-nav-button"
+                      >
+                        <FontAwesomeIcon icon={faUser} /> My Profile
+                      </Button>
+                    </Link>
                     <Nav.Link className="d-flex">
                       <Button
                         onClick={handleLogOut}

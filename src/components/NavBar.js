@@ -191,9 +191,13 @@ export default function NavBar({
               <>
                 {authenticated ? (
                   <>
-                    <Link to="/profile" className="d-flex" role="button">
+                    <Link
+                      to="/profile"
+                      className="d-flex nav-link"
+                      role="button"
+                    >
                       <Button
-                        variant="primary"
+                        variant="outline-secondary"
                         className="mx-2 register-nav-button"
                       >
                         <FontAwesomeIcon icon={faUser} size={"lg"} />{" "}

@@ -4,7 +4,14 @@ import { LinkContainer } from "react-router-bootstrap";
 
 export default function Paginate({ pages, page, keyword }) {
   if (keyword) {
-    keyword = keyword.split("?keyword=")[1].split("&")[0];
+    if (keyword.startsWith("?keyword=")) {
+      keyword = keyword.split("?keyword=")[1].split("&")[0];
+    } else if (keyword.startsWith("?category")) {
+      // keyword = keyword.replaceAll("?category=", "");
+      keyword = keyword.split("?category=")[1].split("&")[0];
+    } else {
+      keyword = keyword.split("?keyword=")[1].split("&")[0];
+    }
   }
   return (
     pages > 1 && (

@@ -82,9 +82,15 @@ def getCategories(request):
 @api_view(["GET"])
 def getProducts(request):
     query = request.query_params.get("keyword")
+    sec_query = request.query_params.get("category")
     if query is None:
         query = ""
-    products = Product.objects.filter(name__icontains=query)
+
+    if sec_query:
+        products = Product.objects.filter(
+            category=sec_query, name__icontains=query)
+    else:
+        products = Product.objects.filter(name__icontains=query)
 
     page = request.query_params.get("page")
     paginator = Paginator(products, 12)

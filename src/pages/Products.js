@@ -13,13 +13,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Paginate from "../components/Paginate";
 
 export default function Products({ history }) {
+  var category = "";
+  var search = "";
   const location = useLocation(history);
   let keyword = location.search;
   var newString = "";
   if (keyword.startsWith("?keyword=")) {
     newString = "";
+    search = keyword;
   } else if (keyword.startsWith("?category")) {
     newString = keyword.replaceAll("?category=", "");
+    category = keyword;
   } else {
     newString = "";
   }
@@ -32,7 +36,7 @@ export default function Products({ history }) {
   const cart = useSelector((state) => state.cart.data);
   useEffect(() => {
     document.title = "shop | resgetit";
-    dispatch(listProducts(keyword));
+    dispatch(listProducts(search, category));
     setCstring(newString);
     dispatch(listCategories());
     fetchCart();
@@ -155,7 +159,7 @@ export default function Products({ history }) {
                 <Paginate
                   page={page}
                   pages={pages}
-                  keyword={keyword.startsWith("?category") ? "" : keyword}
+                  keyword={keyword.startsWith("?category") ? keyword : keyword}
                 />
               </Container>
             </>

@@ -32,13 +32,17 @@ export const listCategories = () => async (dispatch) => {
 };
 
 export const listProducts =
-  (keyword = "") =>
+  (keyword = "", category = "") =>
   async (dispatch) => {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
-
-      const { data } = await axios.get(`/api/products/${keyword}`);
-
+      var info = "";
+      if (keyword) {
+        info = keyword;
+      } else {
+        info = category;
+      }
+      const { data } = await axios.get(`/api/products/${info}`);
       dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
     } catch (error) {
       dispatch({

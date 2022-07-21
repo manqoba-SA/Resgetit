@@ -273,10 +273,16 @@ class PaymentView(APIView):
                 else:
                     order_items = order.items.all()
                     order_items.update(ordered=True)
-                    for item in order_items:
-                        item.item.countInStock -= item.quantity
-                        item.item.save()
-                        item.save()
+                    if "Quintal" in str(room_address):
+                        for item in order_items:
+                            item.item.countInStockQ -= item.quantity
+                            item.item.save()
+                            item.save()
+                    else:
+                        for item in order_items:
+                            item.item.countInStockM -= item.quantity
+                            item.item.save()
+                            item.save()
                     order.ordered = True
                     order.payment = payment
                     order.change = change
@@ -304,10 +310,16 @@ class PaymentView(APIView):
         else:
             order_items = order.items.all()
             order_items.update(ordered=True)
-            for item in order_items:
-                item.item.countInStock -= item.quantity
-                item.item.save()
-                item.save()
+            if "Quintal" in str(room_address):
+                for item in order_items:
+                    item.item.countInStockQ -= item.quantity
+                    item.item.save()
+                    item.save()
+            else:
+                for item in order_items:
+                    item.item.countInStockM -= item.quantity
+                    item.item.save()
+                    item.save()
 
             order.ordered = True
             order.payment = payment

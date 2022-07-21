@@ -2,6 +2,7 @@
 from django.contrib import admin
 from .models import *
 
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
@@ -11,15 +12,15 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug', 'price',
-                    'countInStock', 'createdAt', 'updated']
+                    'countInStockQ', 'createdAt', 'updated']
     list_filter = ['category', 'createdAt', 'updated']
-    list_editable = ['price', 'countInStock']
+    list_editable = ['price', 'countInStockQ']
     prepopulated_fields = {'slug': ('name',)}
 
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id','user',
+    list_display = ['id', 'user',
                     'ordered',
                     'created',
                     'updated',
@@ -30,12 +31,13 @@ class OrderAdmin(admin.ModelAdmin):
         'room_address',
     ]
     list_filter = ['ordered',
-                      'coupon',
+                   'coupon',
                    ]
     search_fields = [
         'user__username',
         'ref_code'
     ]
+
 
 @admin.register(Room_info)
 class Room_infoAdmin(admin.ModelAdmin):
@@ -48,6 +50,7 @@ class Room_infoAdmin(admin.ModelAdmin):
     ]
     list_filter = ['default', 'building', 'user']
     search_fields = ['user', 'room_number']
+
 
 # Register your models here.
 admin.site.register(Review)

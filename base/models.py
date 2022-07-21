@@ -5,14 +5,18 @@ from django.conf import settings
 from django.utils.timezone import datetime, timedelta
 
 # Create your models here.
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    stripe_customer_id = models.CharField(max_length=250, blank=True, null=True)
+    stripe_customer_id = models.CharField(
+        max_length=250, blank=True, null=True)
     one_click_purchasing = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username
+
 
 class Payment(models.Model):
     stripe_charge_id = models.CharField(max_length=250)
@@ -23,6 +27,7 @@ class Payment(models.Model):
 
     def __str__(self):
         return self.user.username
+
 
 class Category(models.Model):
     name = models.CharField(max_length=250, db_index=True)
@@ -36,6 +41,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 class Product(models.Model):
     QUANTITY_SIZES = (
         ('each', 'each'),
@@ -46,7 +52,8 @@ class Product(models.Model):
         Category, on_delete=models.CASCADE, related_name='products')
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True,)
-    countInStock = models.IntegerField(default=0)
+    countInStockQ = models.IntegerField(default=0)
+    countInStockM = models.IntegerField(default=0)
     image = models.ImageField(upload_to='products/%Y/%M/%D', blank=True)
     slide_image = models.ImageField(upload_to='products/%Y/%M/%D', blank=True)
     slide_image1 = models.ImageField(upload_to='products/%Y/%M/%D', blank=True)
@@ -63,6 +70,7 @@ class Product(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     _id = models.AutoField(primary_key=True, editable=False)
+
     class Meta:
         ordering = ('name',)
         index_together = (('_id', 'slug'),)
@@ -93,9 +101,10 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} of {self.item.name}"
-        
+
     def item_total(self):
         return self.quantity * self.item.price
+
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -111,6 +120,7 @@ class Order(models.Model):
     change = models.CharField(max_length=512)
     coupon = models.ForeignKey(
         'Coupon', on_delete=models.SET_NULL, blank=True, null=True)
+
     def return_delivery():
         now = datetime.now()
         return now + timedelta(minutes=20)
@@ -129,7 +139,7 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user.username
-     
+
     def total(self):
         total = 0
         for order_item in self.items.all():
@@ -138,6 +148,7 @@ class Order(models.Model):
             total -= self.coupon.amount
         return total
 
+
 class Room_info(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
@@ -145,10 +156,10 @@ class Room_info(models.Model):
     building = models.CharField(max_length=512)
     room_number = models.CharField(max_length=5)
     default = models.BooleanField(default=False)
-    
+
     def __str__(self):
         return self.user.username + "-" + self.building + "-" + self.room_number + "-" + self.cell_number
-    
+
     class Meta:
         verbose_name_plural = 'Room Addresses'
 
@@ -160,8 +171,9 @@ class Coupon(models.Model):
     def __str__(self):
         return self.code
 
+
 class Announcement(models.Model):
-    ALERTS= (
+    ALERTS = (
         ('primary', 'primary'),
         ('secondary', 'secondary'),
         ('success', 'success'),

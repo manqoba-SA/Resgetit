@@ -3,8 +3,13 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Loader from "./Loader";
 
-export default function Product({ product, addToCart, loading }) {
+export default function Product({ product, addToCart, loading, building }) {
   const [imgLoading, setImgLoading] = useState(false);
+  let stock = 0;
+  stock =
+    building === "Quintal Building"
+      ? product.countInStockQ
+      : product.countInStockM;
   return (
     <>
       <Card className="my-card text-center">
@@ -22,10 +27,15 @@ export default function Product({ product, addToCart, loading }) {
             <b>R{product.price}</b> {product.quantity}
           </h6>
           <>
-            {product.countInStock > 0 ? (
+            {stock ? (
               <>
                 <small className="availability">
-                  Available <span className="left">{product.countInStock}</span>{" "}
+                  Available{" "}
+                  <span className="left">
+                    {building === "Quintal Building"
+                      ? product.countInStockQ
+                      : product.countInStockM}
+                  </span>{" "}
                   Left
                 </small>{" "}
                 <div className="d-flex justify-content-center w-100">

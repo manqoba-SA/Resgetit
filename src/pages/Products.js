@@ -74,6 +74,9 @@ export default function Products({ history }) {
   const submitHandler = (keyword) => {
     navigate(`/shop?category=${keyword}`);
   };
+
+  const [building, setBuilding] = useState("Quintal Building");
+
   return (
     <>
       <StrictMode>
@@ -98,21 +101,45 @@ export default function Products({ history }) {
           ) : (
             <>
               <Container>
-                <div className="w-50">
-                  <DropdownButton
-                    id="dropdown-basic-button"
-                    title="Filter by category"
-                    variant="Secondary"
-                  >
-                    {categories.map((category) => (
-                      <Dropdown.Item
-                        key={category.id}
-                        onClick={() => submitHandler(category.id)}
+                <div className="row">
+                  <div className="col-6">
+                    <div className="w-50">
+                      <DropdownButton
+                        id="dropdown-basic-button"
+                        title="Filter by category"
+                        variant="Secondary"
                       >
-                        {category.name}
+                        {categories.map((category) => (
+                          <Dropdown.Item
+                            key={category.id}
+                            onClick={() => submitHandler(category.id)}
+                          >
+                            {category.name}
+                          </Dropdown.Item>
+                        ))}
+                      </DropdownButton>
+                    </div>
+                  </div>
+                  <div className="col-4">
+                    <DropdownButton
+                      className="w-100"
+                      id="dropdown-basic-button"
+                      title={building}
+                      variant="outline-secondary"
+                    >
+                      <Dropdown.Item
+                        onClick={() => setBuilding("Quintal Building")}
+                      >
+                        Quintal Building
                       </Dropdown.Item>
-                    ))}
-                  </DropdownButton>
+                      <Dropdown.Item
+                        onClick={() => setBuilding("Miller Building")}
+                      >
+                        Miller Building
+                      </Dropdown.Item>
+                    </DropdownButton>
+                    {/* </div> */}
+                  </div>
                 </div>
               </Container>
 
@@ -149,6 +176,7 @@ export default function Products({ history }) {
                       <Col sm={3} key={product.slug} className="my-4">
                         <Product
                           product={product}
+                          building={building}
                           addToCart={() => handleAddToCart(product.slug)}
                           loading={loadingState}
                         />
